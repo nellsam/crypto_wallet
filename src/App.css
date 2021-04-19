@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+
+
+body {
+    background-color: ghostwhite;
+    min-height: 100vh;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    font-size: calc(10px + 2vmin);
+    color: black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#navigation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#nav_title {
+    font-size: 2vw;
+    padding: 1vw;
+    color: dodgerblue;
+    margin-left: 5%;
+    font-weight: bold;
 }
 
-.App-header {
-  background-color: ghostwhite;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
+#nav_items {
+    width: 50%;
+    margin-left: auto;
+    font-size: 1vw;
+    text-align: right;
+    margin-right: 10%;
 }
 
-.App-link {
-  color: #61dafb;
+.nav_item {
+    color: grey;
+    padding: 0.5vw;
+    font-size: 1vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav_item:hover {
+    color: darkgray;
+}
+
+#year_select {
+    padding: 5vw;
+    text-align: left;
+}
+
+#graphs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /*margin: 5vw auto;*/
+}
+
+#btc_graph {
+    border-width: 0.5vw;
+    border-color: darkgrey;
+}
+
+.graph {
+    width: 35vw;
+    height: 35vw;
+    margin: auto;
 }
