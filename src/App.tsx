@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import {BarChart} from "@material-ui/icons";
+//
+// import {Chart} from "react-chartjs-2/";
 
 function App() {
   return (
@@ -18,9 +21,18 @@ function App() {
         >
           Learn React
         </a>
+
+
+
       </header>
     </div>
   );
 }
+
+const config = {
+  type: 'line',
+  // data[0],
+  options: {}
+};
 
 export default App;
