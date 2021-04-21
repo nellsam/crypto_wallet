@@ -1,12 +1,6 @@
-
-
 body {
     background-color: ghostwhite;
     min-height: 100vh;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
     font-size: calc(10px + 2vmin);
     color: black;
 }
@@ -54,19 +48,27 @@ body {
 #graphs {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /*margin: 5vw auto;*/
 }
 
-#btc_graph {
-    border-width: 0.5vw;
-    border-color: darkgrey;
-}
+.graph_layout {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
+    padding: 0;
+    margin: 0;
+}
 .graph {
     width: 35vw;
-    height: 35vw;
-    margin: auto;
+
+    margin: 2.5vw auto;
+    padding: 0;
+
 }
+
