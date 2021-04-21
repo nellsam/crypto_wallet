@@ -18,7 +18,7 @@ body {
     font-size: 2vw;
     padding: 1vw;
     color: dodgerblue;
-    margin-left: 5%;
+    margin: 0 0 0 5%;
     font-weight: bold;
 }
 
@@ -41,8 +41,14 @@ body {
 }
 
 #year_select {
-    padding: 5vw;
+    margin-left: 5vw;
     text-align: left;
+}
+
+.crypto_graph_title{
+    color: black;
+    font-size: 1vw;
+    text-align: center;
 }
 
 #graphs {
@@ -65,7 +71,7 @@ body {
     margin: 0;
 }
 .graph {
-    width: 35vw;
+    width: 25vw;
 
     margin: 2.5vw auto;
     padding: 0;

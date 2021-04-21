@@ -37,70 +37,35 @@ function App() {
                 <div className={'graph_layout'}>
 
                     <div className={'graph'}>
-                        <Line
-                            data={btcState}
-                            options={{
-                                responsive: true,
-
-                                title: {
-                                    display: true,
-                                    text: 'Bitcoin (BTC)',
-                                    fontSize: 25
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'bottom'
-                                }
-                            }}
-                        />
+                        <CryptoGraph name={"Bitcoin (BTC)"} price={"50180"} cryptoState={btcState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <Line
-                            data={ethState}
-                            options={{
-                                responsive: true,
-                                showLines: true,
-
-                                title: {
-                                    display: true,
-                                    text: 'Ethereum (ETH)',
-                                    fontSize: 25
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'bottom'
-                                }
-                            }}
-                        />
+                        <CryptoGraph name={"Ethereum (ETH)"} price={"50180"} cryptoState={ethState}/>
                     </div>
+
+                    <div className={'graph'}>
+                        <CryptoGraph name={"Bitcoin Cash (BCH)"} price={"50180"} cryptoState={bchState}/>
+                    </div>
+
+
                 </div>
 
                 <div className={'graph_layout'}>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Bitcoin (BTC)"} cryptoState={btcState}/>
+                        <CryptoGraph name={"Litecoin (LTC)"}  price={"50180"} cryptoState={ltcState}/>
                     </div>
 
-                    <div id={'eth_graph'} className={'graph'}>
-                        <Line
-                            data={ethState}
-                            options={{
-                                responsive: true,
-                                showLines: true,
-
-                                title: {
-                                    display: true,
-                                    text: 'Ethereum (ETH)',
-                                    fontSize: 25
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'bottom'
-                                }
-                            }}
-                        />
+                    <div className={'graph'}>
+                        <CryptoGraph name={"Stellar (STL)"}  price={"50180"} cryptoState={stlState}/>
                     </div>
+
+                    <div className={'graph'}>
+                        <CryptoGraph name={"Dogecoin (DGC)"} price={"50180"} cryptoState={dgcState}/>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -113,6 +78,14 @@ function App() {
 const btcState = getState(2021, [23673, 27342, 37332, 50180])
 
 const ethState = getState(2021, [23673, 27342, 37332, 50180])
+
+const bchState = getState(2021, [23673, 27342, 37332, 50180])
+
+const ltcState = getState(2021, [23673, 27342, 37332, 50180])
+
+const stlState = getState(2021, [23673, 27342, 37332, 50180])
+
+const dgcState = getState(2021, [23673, 27342, 37332, 50180])
 
 /**
  * Months until according to provided year
