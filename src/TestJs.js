@@ -1,5 +1,7 @@
 // import jquery from
 
+// https://stackoverflow.com/questions/29918400/executing-a-php-file-using-ajax-request
+
 function getMonth(monthIndex) {
 
     // $.ajax({

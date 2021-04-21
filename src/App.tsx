@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Line} from "react-chartjs-2";
 import YearSelect from "./YearSelect";
 import SignInButton from "./SignInButton";
 import {CryptoGraph} from "./CryptoGraph";
@@ -13,14 +12,10 @@ function App() {
     return (
         <div className="App">
 
-            <body>
-
             <div id={'navigation'}>
-                <h4 id={'nav_title'}>Crypto wallet</h4>
+                <a id={'nav_title'} href={"/"}>Crypto wallet</a>
 
                 <div id={'nav_items'}>
-
-                    {/*<a className={'nav_item'}>Sign in</a>*/}
 
                     <SignInButton/>
 
@@ -34,50 +29,61 @@ function App() {
 
             <div id={'graphs'}>
 
-                <div className={'graph_layout'}>
+                <div className={'graph_row'}>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Bitcoin (BTC)"} price={"50180"} cryptoState={btcState}/>
+                        <CryptoGraph name={"Bitcoin (BTC)"} price={50180} cryptoState={btcState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Ethereum (ETH)"} price={"50180"} cryptoState={ethState}/>
+                        <CryptoGraph name={"Ethereum (ETH)"} price={50180} cryptoState={ethState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Bitcoin Cash (BCH)"} price={"50180"} cryptoState={bchState}/>
+                        <CryptoGraph name={"Bitcoin Cash (BCH)"} price={50180} cryptoState={bchState}/>
                     </div>
-
 
                 </div>
 
-                <div className={'graph_layout'}>
+                <div className={'graph_row'}>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Litecoin (LTC)"}  price={"50180"} cryptoState={ltcState}/>
+                        <CryptoGraph name={"Litecoin (LTC)"} price={50180} cryptoState={ltcState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Stellar (STL)"}  price={"50180"} cryptoState={stlState}/>
+                        <CryptoGraph name={"Stellar (XLM)"} price={501806} cryptoState={stlState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Dogecoin (DGC)"} price={"50180"} cryptoState={dgcState}/>
+                        <CryptoGraph name={"Dogecoin (DOGE)"} price={50180} cryptoState={dgcState}/>
                     </div>
-
 
                 </div>
             </div>
 
-            </body>
 
+            <div className={'footer_layout'}>
+
+                <div className={'footer_items'}>
+
+                    <section id={'footer_authors'}>
+                        <a className={'footer_author'} href={""}>Samuel Bernát</a>
+                        <a className={'footer_author'} href={""}>Adam Kozma</a>
+                    </section>
+
+                    <img id={'footer_github'} src={"github_icon.png"} alt={"Github project"}/>
+
+                </div>
+
+            </div>
         </div>
     );
 }
 
 const btcState = getState(2021, [23673, 27342, 37332, 50180])
 
-const ethState = getState(2021, [23673, 27342, 37332, 50180])
+const ethState = getState(2021, [602, 1084, 1171, 1629])
 
 const bchState = getState(2021, [23673, 27342, 37332, 50180])
 
@@ -90,7 +96,8 @@ const dgcState = getState(2021, [23673, 27342, 37332, 50180])
 /**
  * Months until according to provided year
  */
-function getMonthsUntilNow(year: Number) {
+function getMonthsUntilNow(year: Number, dataCountPerMonth: Number) {
+    // ['January', '' ,'February', '' , 'March', '', 'April', '']
     return ['January', 'February', 'March', 'April']
 }
 
@@ -110,14 +117,14 @@ function getMonth(numberIndex: Number) {
  */
 export function getState(year: Number, data: Array<Number>): any {
     return {
-        labels: getMonthsUntilNow(year),
+        labels: getMonthsUntilNow(year, 1),
         datasets: [
             {
                 label: 'Price',
                 backgroundColor: 'rgba(75,192,192,1)',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 1,
-                data: data //[602, 1084, 1171, 1629] // data: [65, 59, 80, 81]
+                data: data
             }
         ]
     }
