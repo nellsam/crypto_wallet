@@ -1,6 +1,10 @@
 import React from "react";
 import {Line} from "react-chartjs-2";
 
+// https://www.educative.io/edpresso/how-to-use-chartjs-to-create-charts-in-react
+//https://www.chartjs.org/docs/latest/getting-started/integration.html
+//https://www.chartjs.org/docs/latest/charts/line.html
+
 export function CryptoGraph(props: CryptoGraphProps) {
     return (
         <div>
@@ -14,12 +18,15 @@ export function CryptoGraph(props: CryptoGraphProps) {
 
                     title: {
                         display: false,
-                        text: props.name,
                         fontSize: 25
                     },
                     legend: {
                         display: false,
                         position: 'bottom'
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: "linear"
                     }
                 }}
             />
@@ -28,11 +35,11 @@ export function CryptoGraph(props: CryptoGraphProps) {
 }
 
 export function getCryptocurrencyTitle(props: CryptoGraphProps): string {
-    return props.name + " " + getFormattedPrice(props.price) + "€"
+    return props.name + " " + getFormattedPrice(props.price)
 }
 
-export function getFormattedPrice(price : Number) : string {
-    return price.toLocaleString()
+export function getFormattedPrice(price: Number): string {
+    return price.toLocaleString() + "€"
 }
 
 /**

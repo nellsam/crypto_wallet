@@ -3,10 +3,8 @@ import './App.css';
 import YearSelect from "./YearSelect";
 import SignInButton from "./SignInButton";
 import {CryptoGraph} from "./CryptoGraph";
+import TestJs from "./TestJs";
 
-// https://www.educative.io/edpresso/how-to-use-chartjs-to-create-charts-in-react
-//https://www.chartjs.org/docs/latest/getting-started/integration.html
-//https://www.chartjs.org/docs/latest/charts/line.html
 
 function App() {
     return (
@@ -42,7 +40,6 @@ function App() {
                 </div>
                 <div className={'graph_row'}>
 
-
                     <div className={'graph'}>
                         <CryptoGraph name={"Bitcoin Cash (BCH)"} price={938} cryptoState={bchState}/>
                     </div>
@@ -66,17 +63,18 @@ function App() {
                 </div>
             </div>
 
-
             <div className={'footer_layout'}>
 
                 <div className={'footer_items'}>
 
                     <section id={'footer_authors'}>
-                        <a className={'footer_author'} href={""}>Samuel Bernát</a>
-                        <a className={'footer_author'} href={""}>Adam Kozma</a>
+                        <a className={'footer_author'} href={'_blank'} rel="noreferrer">Samuel Bernát</a>
+                        <a className={'footer_author'} href={'_blank'} rel="noreferrer">Adam Kozma</a>
                     </section>
 
-                    <img id={'footer_github'} src={"github_icon.png"} alt={"Github project"}/>
+                    <a href={githubPath} target="_blank" rel='noreferrer'>
+                        <img id={'footer_github'} src={"github_icon.png"} alt={"Github project"}/>
+                    </a>
 
                 </div>
 
@@ -98,10 +96,10 @@ const xlmState = getState(2021, [0.13, 0.28, 0.32, 0.49, 0.43, 0.38, 0.42, 0.64]
 const dgcState = getState(2021, [0.01, 0.01, 0.02, 0.06, 0.05, 0.06, 0.06, 0.18])
 
 /**
- * Months until according to provided year
+ * Months until now according to provided year
  */
 function getMonthsUntilNow(year: Number, dataCountPerMonth: Number) {
-    return  ['January', '' ,'February', '' , 'March', '', 'April', '']
+    return ['January', '', 'February', '', 'March', '', 'April', '']
     //return ['January', 'February', 'March', 'April']
 }
 
@@ -109,8 +107,10 @@ function getMonthsUntilNow(year: Number, dataCountPerMonth: Number) {
  * Get corresponding month for provided index.
  * @param numberIndex
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getMonth(numberIndex: Number) {
     // TODO : Call php function using ajax
+    TestJs()
 }
 
 /**
@@ -121,7 +121,7 @@ function getMonth(numberIndex: Number) {
  */
 export function getState(year: Number, data: Array<Number>): any {
     return {
-        labels: getMonthsUntilNow(year, 1),
+        labels: getMonthsUntilNow(year, 2),
         datasets: [
             {
                 label: 'Price',
@@ -133,6 +133,11 @@ export function getState(year: Number, data: Array<Number>): any {
         ]
     }
 }
+
+/**
+ * Link to github project.
+ */
+const githubPath = 'https://github.com/nellsam/crypto_wallet'
 
 
 export default App;

@@ -89,11 +89,9 @@
 
 .footer_layout {
     width: 100%;
-    /*padding-bottom: 2vw;*/
-    /*padding-top: 2vw;*/
 
-    background: rgb(245,245,255);
-    background: linear-gradient(240deg, rgba(245,245,255,1) 0%, rgba(247,247,255,1) 0%, rgba(248,248,255,1) 100%);
+    background: rgb(248,248,255);
+    background: linear-gradient(120deg, rgba(248,248,255,1) 0%, rgba(245,245,255,1) 100%, rgba(247,247,255,1) 100%);
 }
 
 .footer_items {
