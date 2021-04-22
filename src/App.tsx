@@ -32,15 +32,23 @@ function App() {
                 <div className={'graph_row'}>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Bitcoin (BTC)"} price={50180} cryptoState={btcState}/>
+                        <CryptoGraph name={"Bitcoin (BTC)"} price={54678} cryptoState={btcState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Ethereum (ETH)"} price={50180} cryptoState={ethState}/>
+                        <CryptoGraph name={"Ethereum (ETH)"} price={2601} cryptoState={ethState}/>
+                    </div>
+
+                </div>
+                <div className={'graph_row'}>
+
+
+                    <div className={'graph'}>
+                        <CryptoGraph name={"Bitcoin Cash (BCH)"} price={938} cryptoState={bchState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Bitcoin Cash (BCH)"} price={50180} cryptoState={bchState}/>
+                        <CryptoGraph name={"Litecoin (LTC)"} price={282} cryptoState={ltcState}/>
                     </div>
 
                 </div>
@@ -48,15 +56,11 @@ function App() {
                 <div className={'graph_row'}>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Litecoin (LTC)"} price={50180} cryptoState={ltcState}/>
+                        <CryptoGraph name={"Stellar (XLM)"} price={0.49} cryptoState={xlmState}/>
                     </div>
 
                     <div className={'graph'}>
-                        <CryptoGraph name={"Stellar (XLM)"} price={501806} cryptoState={stlState}/>
-                    </div>
-
-                    <div className={'graph'}>
-                        <CryptoGraph name={"Dogecoin (DOGE)"} price={50180} cryptoState={dgcState}/>
+                        <CryptoGraph name={"Dogecoin (DOGE)"} price={0.28} cryptoState={dgcState}/>
                     </div>
 
                 </div>
@@ -81,24 +85,24 @@ function App() {
     );
 }
 
-const btcState = getState(2021, [23673, 27342, 37332, 50180])
+const btcState = getState(2021, [29388, 36790, 33535, 47936, 49635, 55665, 58730, 63233])
 
-const ethState = getState(2021, [602, 1084, 1171, 1629])
+const ethState = getState(2021, [730, 1169, 1374, 1779, 1571, 1794, 1967, 2517])
 
-const bchState = getState(2021, [23673, 27342, 37332, 50180])
+const bchState = getState(2021, [342, 491, 414, 715, 501, 523, 555, 866])
 
-const ltcState = getState(2021, [23673, 27342, 37332, 50180])
+const ltcState = getState(2021, [126, 143, 132, 207, 176, 200, 202, 286])
 
-const stlState = getState(2021, [23673, 27342, 37332, 50180])
+const xlmState = getState(2021, [0.13, 0.28, 0.32, 0.49, 0.43, 0.38, 0.42, 0.64])
 
-const dgcState = getState(2021, [23673, 27342, 37332, 50180])
+const dgcState = getState(2021, [0.01, 0.01, 0.02, 0.06, 0.05, 0.06, 0.06, 0.18])
 
 /**
  * Months until according to provided year
  */
 function getMonthsUntilNow(year: Number, dataCountPerMonth: Number) {
-    // ['January', '' ,'February', '' , 'March', '', 'April', '']
-    return ['January', 'February', 'March', 'April']
+    return  ['January', '' ,'February', '' , 'March', '', 'April', '']
+    //return ['January', 'February', 'March', 'April']
 }
 
 /**
