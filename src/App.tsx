@@ -1,10 +1,9 @@
 import React from 'react';
 import './App.css';
 import YearSelect from "./YearSelect";
-import SignInButton from "./SignInButton";
 import {CryptoGraph} from "./CryptoGraph";
 import TestJs from "./TestJs";
-
+import AuthDialog from "./AuthDialog";
 
 function App() {
     return (
@@ -15,7 +14,7 @@ function App() {
 
                 <div id={'nav_items'}>
 
-                    <SignInButton/>
+                    <AuthDialog/>
 
                 </div>
             </div>
