@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import YearSelect from "./YearSelect";
-import {CryptoGraph} from "./CryptoGraph";
+import {CryptoGraph} from "./graphs/CryptoGraph";
 import TestJs from "./TestJs";
-import AuthDialog from "./AuthDialog";
+import SignUpDialog from "./authentication/SignUpDialog";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
 
                 <div id={'nav_items'}>
 
-                    <AuthDialog/>
+                   <SignUpDialog/>
 
                 </div>
             </div>

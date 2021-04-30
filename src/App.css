@@ -135,9 +135,12 @@
     margin-bottom: 2vw;
 }
 
+.auth_field_layout {
+    margin: 0.5vw;
+}
+
 .auth_field {
     width: 25vw;
-    padding: 5vw;
 }
 
 .auth_switch_button_layout {

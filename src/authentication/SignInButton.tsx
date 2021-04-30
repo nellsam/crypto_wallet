@@ -9,7 +9,7 @@ export default function SignInButton(props : SignInButtonProps) {
 
     return (
         <div className={classes.root}>
-            <Button variant="outlined" color="primary" onClick={props.onClick()}>
+            <Button variant="outlined" color="primary" onClick={props.onClick}>
                 Sign in
             </Button>
         </div>
