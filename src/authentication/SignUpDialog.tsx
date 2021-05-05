@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import {createStyles, Theme, withStyles, WithStyles} from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme, withStyles, WithStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog, {DialogProps} from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -26,7 +26,7 @@ export function SignUpDialog() {
         // Id and value of changed field
         const {id, value} = e.target
 
-        const changedField : string = getChangedAuthField(id.toString())
+        const changedField: string = getChangedAuthField(id.toString())
 
         // Update state of react component
         setState(prevState => ({
@@ -89,26 +89,12 @@ export function SignUpDialog() {
 
             <SignInButton onClick={handleOpen}/>
 
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={state.open}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>Sign up</DialogTitle>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={state.open} maxWidth={"lg"}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>Sign in</DialogTitle>
                 <DialogContent dividers>
 
-                    <div>
-                        <form noValidate autoComplete="off" className={'auth_form'}>
-                            <div className={'auth_field_layout'}>
-                                <TextField type={'string'} label={'First name'}
-                                           error={invalidFirstName} helperText={invalidFirstNameMessage}
-                                           className={'auth_field'} id={'firstName'}
-                                           onChange={(e) => handleChange(e)}/>
-                            </div>
-
-                            <div className={'auth_field_layout'}>
-                                <TextField type={'string'} label={'Last name'}
-                                           error={invalidLastName} helperText={invalidLastNameMessage}
-                                           className={'auth_field'} id={'lastName'}
-                                           onChange={(e) => handleChange(e)}/>
-                            </div>
-
+                    <div id={"auth_layout"}>
+                        <div id={"sign_in_layout"}>
                             <div className={'auth_field_layout'}>
                                 <TextField type={'email'} label={'Email'}
                                            error={invalidEmail} helperText={invalidEmailMessage}
@@ -122,21 +108,54 @@ export function SignUpDialog() {
                                            className={'auth_field'} id={'password'}
                                            onChange={(e) => handleChange(e)}/>
                             </div>
-
-                            <div className={'auth_field_layout'}>
-                                <TextField type={'phone_number'} label={'Phone number'}
-                                           error={invalidPhoneNumber} helperText={invalidPhoneNumberMessage}
-                                           className={'auth_field'} id={'phoneNumber'}
-                                           onChange={(e) => handleChange(e)}/>
-                            </div>
-                        </form>
-
-                        <div className={'auth_switch_button_layout'}>
-                            <Button color="primary" size={'small'}>Already signed up? Sign in</Button>
                         </div>
 
-                    </div>
 
+                        <div>
+
+                            <form noValidate autoComplete="off" className={'auth_form'}>
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'string'} label={'First name'}
+                                               error={invalidFirstName} helperText={invalidFirstNameMessage}
+                                               className={'auth_field'} id={'firstName'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'string'} label={'Last name'}
+                                               error={invalidLastName} helperText={invalidLastNameMessage}
+                                               className={'auth_field'} id={'lastName'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'email'} label={'Email'}
+                                               error={invalidEmail} helperText={invalidEmailMessage}
+                                               className={'auth_field'} id={'email'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'password'} label={'Password'}
+                                               error={invalidPassword} helperText={invalidPasswordMessage}
+                                               className={'auth_field'} id={'password'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'phone_number'} label={'Phone number'}
+                                               error={invalidPhoneNumber} helperText={invalidPhoneNumberMessage}
+                                               className={'auth_field'} id={'phoneNumber'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+                            </form>
+
+                            <div className={'auth_switch_button_layout'}>
+                                <Button color="primary" size={'small'}>Already signed up? Sign in</Button>
+                            </div>
+
+                        </div>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus
@@ -149,6 +168,24 @@ export function SignUpDialog() {
         </div>
     );
 }
+// const styles = makeStyles((theme: Theme) =>
+//     createStyles({
+//         form: {
+//             display: 'flex',
+//             flexDirection: 'column',
+//             margin: 'auto',
+//             width: 'fit-content',
+//         },
+//         formControl: {
+//             marginTop: theme.spacing(2),
+//             minWidth: 120,
+//         },
+//         formControlLabel: {
+//             marginTop: theme.spacing(1),
+//         },
+//     }),
+// );
+
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -191,9 +228,8 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 
-
 // firstName: string, lastName: string, email: string, password: string
-function signUp(state : SignUpState) {
+function signUp(state: SignUpState) {
 
     console.log("Signed up called with " + state.firstName + ", " + state.lastName + ", " + state.email + ", "
         + state.password + ", " + state.phoneNumber)
