@@ -2,9 +2,6 @@
 
 export interface SignUpState {
 
-    // Manages opening and closing dialog
-    open: boolean,
-
     firstName: string,
     firstNameChanged: boolean,
 
@@ -26,8 +23,6 @@ export interface SignUpState {
  */
 export function getInitialSignUpState() : SignUpState {
     return ({
-        // Manages opening and closing dialog
-        open: false,
 
         firstName: "",
         firstNameChanged: false,

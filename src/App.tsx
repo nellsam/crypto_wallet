@@ -3,7 +3,7 @@ import './App.css';
 import YearSelect from "./YearSelect";
 import {CryptoGraph} from "./graphs/CryptoGraph";
 import TestJs from "./TestJs";
-import SignUpDialog from "./authentication/SignUpDialog";
+import AuthDialog from "./authentication/AuthDialog";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
 
                 <div id={'nav_items'}>
 
-                   <SignUpDialog/>
+                   <AuthDialog/>
 
                 </div>
             </div>

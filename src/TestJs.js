@@ -7,6 +7,7 @@ export function TestJs() {
     jQuery.ajax({
         url: 'Test.php',
         type: 'POST',
+        dataType: "json",
         success: function (data) {
             console.log("Retrieved value " + data)
         },

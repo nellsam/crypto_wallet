@@ -11,16 +11,21 @@ import SignInButton from "./SignInButton";
 import {DialogActions, TextField} from "@material-ui/core";
 import {isEmailValid, isNameValid, isPasswordValid, isPhoneNumberValid} from "./AuthValidation";
 import {SignUpState, getChangedAuthField, getInitialSignUpState} from "./SignUpState";
+import {blue} from "@material-ui/core/colors";
+import {getInitialSignInState, SignInState} from "./SignInState";
 
 // https://material-ui.com/components/text-fields/
 // https://material-ui.com/components/buttons/
 // https://reactjs.org/docs/forms.html
 // https://material-ui.com/components/dialogs/#dialog
 
-export function SignUpDialog() {
+export function AuthDialog() {
 
-    const [state, setState] = useState(getInitialSignUpState)
+    const [dialogOpen, setDialogOpen] = useState(false)
+    const [signUpState, setSignUpState] = useState(getInitialSignUpState)
+    const [singInState, setSignInState] = useState(getInitialSignInState)
 
+    // Handle text field changes
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 
         // Id and value of changed field
@@ -29,7 +34,7 @@ export function SignUpDialog() {
         const changedField: string = getChangedAuthField(id.toString())
 
         // Update state of react component
-        setState(prevState => ({
+        setSignUpState(prevState => ({
 
             // Restore previous state
             ...prevState,
@@ -43,76 +48,89 @@ export function SignUpDialog() {
     }
 
     // Handle opening dialog
-    const handleOpen = () => {
-        setState(prevState => ({
-            ...prevState,
-            open: true
-        }))
+    const handleOpenDialog = () => {
+        // setSignUpState(prevState => ({
+        //     ...prevState,
+        //     open: true
+        // }))
+
+        setDialogOpen(true)
     }
 
     // Handle closing dialog
-    const handleClose = () => {
-        setState(prevState => ({
-            ...prevState,
-            open: false
-        }))
+    const handleCloseDialog = () => {
+        // setSignUpState(prevState => ({
+        //     ...prevState,
+        //     open: false
+        // }))
+
+        setDialogOpen(false)
     }
 
     // Validation is performed after field is changed
     let invalidFirstName = false
-    if (state.firstNameChanged) invalidFirstName = !isNameValid(state.firstName)
+    if (signUpState.firstNameChanged) invalidFirstName = !isNameValid(signUpState.firstName)
     let invalidFirstNameMessage = ''
     if (invalidFirstName) invalidFirstNameMessage = 'Invalid first name'
 
     let invalidLastName = false
-    if (state.lastNameChanged) invalidLastName = !isNameValid(state.lastName)
+    if (signUpState.lastNameChanged) invalidLastName = !isNameValid(signUpState.lastName)
     let invalidLastNameMessage = ''
     if (invalidLastName) invalidLastNameMessage = 'Invalid last name'
 
     let invalidEmail = false
-    if (state.emailChanged) invalidEmail = !isEmailValid(state.email)
+    if (signUpState.emailChanged) invalidEmail = !isEmailValid(signUpState.email)
     let invalidEmailMessage = ''
     if (invalidEmail) invalidEmailMessage = 'Invalid email'
 
     let invalidPassword = false
-    if (state.passwordChanged) invalidPassword = !isPasswordValid(state.password)
+    if (signUpState.passwordChanged) invalidPassword = !isPasswordValid(signUpState.password)
     let invalidPasswordMessage = ''
     if (invalidPassword) invalidPasswordMessage = 'Invalid password'
 
     let invalidPhoneNumber = false
-    if (state.phoneNumberChanged) invalidPhoneNumber = !isPhoneNumberValid(state.phoneNumber)
+    if (signUpState.phoneNumberChanged) invalidPhoneNumber = !isPhoneNumberValid(signUpState.phoneNumber)
     let invalidPhoneNumberMessage = ''
     if (invalidPhoneNumber) invalidPhoneNumberMessage = 'Invalid phone number'
 
     return (
         <div>
 
-            <SignInButton onClick={handleOpen}/>
+            <SignInButton onClick={handleOpenDialog}/>
 
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={state.open} maxWidth={"lg"}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>Sign in</DialogTitle>
+            <Dialog onClose={handleCloseDialog} aria-labelledby="customized-dialog-title" open={dialogOpen}
+                    maxWidth={"lg"}>
+                <DialogTitle id="customized-dialog-title" onClose={handleCloseDialog}>Sign in</DialogTitle>
                 <DialogContent dividers>
 
                     <div id={"auth_layout"}>
-                        <div id={"sign_in_layout"}>
-                            <div className={'auth_field_layout'}>
-                                <TextField type={'email'} label={'Email'}
-                                           error={invalidEmail} helperText={invalidEmailMessage}
-                                           className={'auth_field'} id={'email'}
-                                           onChange={(e) => handleChange(e)}/>
+
+                        {/* Sign in form */}
+                        <div className={'auth_form_layout'}>
+                            <form noValidate autoComplete="off" className={'auth_form'}>
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'email'} label={'Email'} autoComplete={'current-email'}
+                                               className={'auth_field'} id={'sign_in_email'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+
+                                <div className={'auth_field_layout'}>
+                                    <TextField type={'password'} label={'Password'} autoComplete={'current-password'}
+                                               className={'auth_field'} id={'sign_in_password'}
+                                               onChange={(e) => handleChange(e)}/>
+                                </div>
+                            </form>
+
+                            <div className={'auth_button_layout'}>
+                                <Button variant="contained" color="primary" size={'medium'}>Sign in</Button>
                             </div>
 
-                            <div className={'auth_field_layout'}>
-                                <TextField type={'password'} label={'Password'}
-                                           error={invalidPassword} helperText={invalidPasswordMessage}
-                                           className={'auth_field'} id={'password'}
-                                           onChange={(e) => handleChange(e)}/>
-                            </div>
                         </div>
 
+                        <div id={'auth_separator'}/>
 
-                        <div>
-
+                        {/* Sign up form */}
+                        <div className={'auth_form_layout'}>
                             <form noValidate autoComplete="off" className={'auth_form'}>
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'string'} label={'First name'}
@@ -129,14 +147,14 @@ export function SignUpDialog() {
                                 </div>
 
                                 <div className={'auth_field_layout'}>
-                                    <TextField type={'email'} label={'Email'}
+                                    <TextField type={'email'} label={'Email'} autoComplete={'current-email'}
                                                error={invalidEmail} helperText={invalidEmailMessage}
                                                className={'auth_field'} id={'email'}
                                                onChange={(e) => handleChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
-                                    <TextField type={'password'} label={'Password'}
+                                    <TextField type={'password'} label={'Password'} autoComplete={'current-password'}
                                                error={invalidPassword} helperText={invalidPasswordMessage}
                                                className={'auth_field'} id={'password'}
                                                onChange={(e) => handleChange(e)}/>
@@ -150,48 +168,25 @@ export function SignUpDialog() {
                                 </div>
                             </form>
 
-                            <div className={'auth_switch_button_layout'}>
-                                <Button color="primary" size={'small'}>Already signed up? Sign in</Button>
+                            <div className={'auth_button_layout'}>
+                                <Button variant="contained" color="primary" size={'medium'} autoFocus
+                                        onClick={() => signUp(signUpState)}>Sign up</Button>
                             </div>
 
                         </div>
                     </div>
                 </DialogContent>
-                <DialogActions>
-                    <Button autoFocus
-                            onClick={() => signUp(state)}
-                            color="primary">
-                        Sign up
-                    </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );
 }
-// const styles = makeStyles((theme: Theme) =>
-//     createStyles({
-//         form: {
-//             display: 'flex',
-//             flexDirection: 'column',
-//             margin: 'auto',
-//             width: 'fit-content',
-//         },
-//         formControl: {
-//             marginTop: theme.spacing(2),
-//             minWidth: 120,
-//         },
-//         formControlLabel: {
-//             marginTop: theme.spacing(1),
-//         },
-//     }),
-// );
 
-
-const styles = (theme: Theme) =>
+const titleStyles = (theme: Theme) =>
     createStyles({
         root: {
             margin: 0,
             padding: theme.spacing(2),
+            fontWeight: "bold"
         },
         closeButton: {
             position: 'absolute',
@@ -199,15 +194,23 @@ const styles = (theme: Theme) =>
             top: theme.spacing(1),
             color: theme.palette.grey[500],
         },
+        formControl: {
+            marginTop: theme.spacing(2),
+            minWidth: 120,
+        },
+        formControlLabel: {
+            marginTop: theme.spacing(1),
+        }
     });
 
-export interface DialogTitleProps extends WithStyles<typeof styles> {
+export interface DialogTitleProps extends WithStyles<typeof titleStyles> {
     id: string;
     children: React.ReactNode;
     onClose: () => void;
 }
 
-const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
+// Configured dialog title
+const DialogTitle = withStyles(titleStyles)((props: DialogTitleProps) => {
     const {children, classes, onClose, ...other} = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
@@ -221,6 +224,7 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
     );
 });
 
+// Configured dialog content
 const DialogContent = withStyles((theme: Theme) => ({
     root: {
         padding: theme.spacing(2),
@@ -228,17 +232,17 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 
-// firstName: string, lastName: string, email: string, password: string
 function signUp(state: SignUpState) {
 
-    console.log("Signed up called with " + state.firstName + ", " + state.lastName + ", " + state.email + ", "
+    console.log("Sign up called with " + state.firstName + ", " + state.lastName + ", " + state.email + ", "
         + state.password + ", " + state.phoneNumber)
 
     // TODO : Add user to the local database using php
 }
 
-function signIn(email: string, password: string) {
+function signIn(state : SignInState) {
 
+    console.log("Sign in called with " + state.email + ", " + state.password)
 }
 
-export default SignUpDialog;
+export default AuthDialog;
