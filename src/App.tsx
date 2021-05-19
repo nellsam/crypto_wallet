@@ -3,9 +3,12 @@ import './App.css';
 import YearSelect from "./YearSelect";
 import {CryptoGraph} from "./graphs/CryptoGraph";
 import TestJs from "./TestJs";
-import AuthDialog from "./authentication/AuthDialog";
+import AuthDialog from "./authentication/ui/AuthDialog";
 
 function App() {
+
+    TestJs()
+
     return (
         <div className="App">
 
@@ -109,7 +112,6 @@ function getMonthsUntilNow(year: Number, dataCountPerMonth: Number) {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getMonth(numberIndex: Number) {
     // TODO : Call php function using ajax
-    TestJs()
 }
 
 /**

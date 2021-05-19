@@ -9,10 +9,15 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import SignInButton from "./SignInButton";
 import {DialogActions, TextField} from "@material-ui/core";
-import {isEmailValid, isNameValid, isPasswordValid, isPhoneNumberValid} from "./AuthValidation";
-import {SignUpState, getChangedAuthField, getInitialSignUpState} from "./SignUpState";
+import {isEmailValid, isNameValid, isPasswordValid, isPhoneNumberValid} from "../utils/AuthValidation";
+import {SignUpState, getChangedAuthField, getInitialSignUpState} from "../state/SignUpState";
 import {blue} from "@material-ui/core/colors";
-import {getInitialSignInState, SignInState} from "./SignInState";
+import {getInitialSignInState, SignInState} from "../state/SignInState";
+import {signUp} from "../utils/SignUp";
+// import {Redirect} from "react-router";
+import {Redirect, Route, Switch} from "react-router";
+import Wallet from "../../Wallet";
+import {BrowserRouter} from "react-router-dom";
 
 // https://material-ui.com/components/text-fields/
 // https://material-ui.com/components/buttons/
@@ -23,7 +28,7 @@ export function AuthDialog() {
 
     const [dialogOpen, setDialogOpen] = useState(false)
     const [signUpState, setSignUpState] = useState(getInitialSignUpState)
-    const [singInState, setSignInState] = useState(getInitialSignInState)
+    const [signInState, setSignInState] = useState(getInitialSignInState)
 
     // Handle text field changes
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -122,7 +127,8 @@ export function AuthDialog() {
                             </form>
 
                             <div className={'auth_button_layout'}>
-                                <Button variant="contained" color="primary" size={'medium'}>Sign in</Button>
+                                <Button variant="contained" color="primary" size={'medium'}
+                                        onClick={() => signIn(signInState)}>Sign in</Button>
                             </div>
 
                         </div>
@@ -177,6 +183,16 @@ export function AuthDialog() {
                     </div>
                 </DialogContent>
             </Dialog>
+
+            <BrowserRouter>
+
+                <Switch>
+                    <Route path="/wallet">
+                        <Wallet/>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+
         </div>
     );
 }
@@ -232,17 +248,20 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 
-function signUp(state: SignUpState) {
-
-    console.log("Sign up called with " + state.firstName + ", " + state.lastName + ", " + state.email + ", "
-        + state.password + ", " + state.phoneNumber)
-
-    // TODO : Add user to the local database using php
-}
-
-function signIn(state : SignInState) {
+function signIn(state: SignInState) {
 
     console.log("Sign in called with " + state.email + ", " + state.password)
+
+    // https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
+    redirect()
+}
+
+function redirect() {
+    return (
+        <Route exact path="/wallet">
+            <Wallet/>
+        </Route>
+    )
 }
 
 export default AuthDialog;
