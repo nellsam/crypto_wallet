@@ -11,13 +11,10 @@ import SignInButton from "./SignInButton";
 import {DialogActions, TextField} from "@material-ui/core";
 import {isEmailValid, isNameValid, isPasswordValid, isPhoneNumberValid} from "../utils/AuthValidation";
 import {SignUpState, getChangedAuthField, getInitialSignUpState} from "../state/SignUpState";
-import {blue} from "@material-ui/core/colors";
 import {getInitialSignInState, SignInState} from "../state/SignInState";
 import {signUp} from "../utils/SignUp";
-// import {Redirect} from "react-router";
-import {Redirect, Route, Switch} from "react-router";
+import {Redirect, Route} from "react-router";
 import Wallet from "../../Wallet";
-import {BrowserRouter} from "react-router-dom";
 
 // https://material-ui.com/components/text-fields/
 // https://material-ui.com/components/buttons/
@@ -29,9 +26,10 @@ export function AuthDialog() {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [signUpState, setSignUpState] = useState(getInitialSignUpState)
     const [signInState, setSignInState] = useState(getInitialSignInState)
+    const [signedIn, setSignedIn] = useState(false)
 
     // Handle text field changes
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const handleSignUpChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 
         // Id and value of changed field
         const {id, value} = e.target
@@ -52,23 +50,33 @@ export function AuthDialog() {
         }))
     }
 
+    const handleSignInChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const {id, value} = e.target
+
+        let changedId: string
+        if (id === 'sign_in_email') changedId = 'email'
+        else if (id === 'sign_in_password') changedId = 'password'
+
+        setSignInState(prevState => ({
+            ...prevState,
+            [changedId]: value
+        }))
+    }
+
+    const handleSignIn = () => {
+
+        signIn(signInState)
+
+        setSignedIn(true)
+    }
+
     // Handle opening dialog
     const handleOpenDialog = () => {
-        // setSignUpState(prevState => ({
-        //     ...prevState,
-        //     open: true
-        // }))
-
         setDialogOpen(true)
     }
 
     // Handle closing dialog
     const handleCloseDialog = () => {
-        // setSignUpState(prevState => ({
-        //     ...prevState,
-        //     open: false
-        // }))
-
         setDialogOpen(false)
     }
 
@@ -98,6 +106,11 @@ export function AuthDialog() {
     let invalidPhoneNumberMessage = ''
     if (invalidPhoneNumber) invalidPhoneNumberMessage = 'Invalid phone number'
 
+    if (signedIn) {
+        console.log('Redirecting user')
+        return (<Redirect to={'/wallet'}/>)
+    }
+
     return (
         <div>
 
@@ -116,19 +129,19 @@ export function AuthDialog() {
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'email'} label={'Email'} autoComplete={'current-email'}
                                                className={'auth_field'} id={'sign_in_email'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignInChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'password'} label={'Password'} autoComplete={'current-password'}
                                                className={'auth_field'} id={'sign_in_password'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignInChange(e)}/>
                                 </div>
                             </form>
 
                             <div className={'auth_button_layout'}>
                                 <Button variant="contained" color="primary" size={'medium'}
-                                        onClick={() => signIn(signInState)}>Sign in</Button>
+                                        onClick={() => handleSignIn()}>Sign in</Button>
                             </div>
 
                         </div>
@@ -142,35 +155,35 @@ export function AuthDialog() {
                                     <TextField type={'string'} label={'First name'}
                                                error={invalidFirstName} helperText={invalidFirstNameMessage}
                                                className={'auth_field'} id={'firstName'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignUpChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'string'} label={'Last name'}
                                                error={invalidLastName} helperText={invalidLastNameMessage}
                                                className={'auth_field'} id={'lastName'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignUpChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'email'} label={'Email'} autoComplete={'current-email'}
                                                error={invalidEmail} helperText={invalidEmailMessage}
                                                className={'auth_field'} id={'email'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignUpChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'password'} label={'Password'} autoComplete={'current-password'}
                                                error={invalidPassword} helperText={invalidPasswordMessage}
                                                className={'auth_field'} id={'password'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignUpChange(e)}/>
                                 </div>
 
                                 <div className={'auth_field_layout'}>
                                     <TextField type={'phone_number'} label={'Phone number'}
                                                error={invalidPhoneNumber} helperText={invalidPhoneNumberMessage}
                                                className={'auth_field'} id={'phoneNumber'}
-                                               onChange={(e) => handleChange(e)}/>
+                                               onChange={(e) => handleSignUpChange(e)}/>
                                 </div>
                             </form>
 
@@ -183,15 +196,6 @@ export function AuthDialog() {
                     </div>
                 </DialogContent>
             </Dialog>
-
-            <BrowserRouter>
-
-                <Switch>
-                    <Route path="/wallet">
-                        <Wallet/>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
 
         </div>
     );
