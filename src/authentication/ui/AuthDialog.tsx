@@ -15,6 +15,7 @@ import {getInitialSignInState, SignInState} from "../state/SignInState";
 import {signUp} from "../utils/SignUp";
 import {Redirect, Route} from "react-router";
 import Wallet from "../../Wallet";
+import {signIn} from "../utils/SignIn";
 
 // https://material-ui.com/components/text-fields/
 // https://material-ui.com/components/buttons/
@@ -65,9 +66,11 @@ export function AuthDialog() {
 
     const handleSignIn = () => {
 
-        signIn(signInState)
-
-        setSignedIn(true)
+        handleUserSignIn(signInState, (successful) => {
+            if (successful) {
+                setSignedIn(true)
+            }
+        })
     }
 
     // Handle opening dialog
@@ -252,20 +255,18 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 
-function signIn(state: SignInState) {
+function handleUserSignIn(state: SignInState, callback : (successful : boolean) => any) {
 
     console.log("Sign in called with " + state.email + ", " + state.password)
 
-    // https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
-    redirect()
-}
+    signIn(state, (successful : boolean) => {
 
-function redirect() {
-    return (
-        <Route exact path="/wallet">
-            <Wallet/>
-        </Route>
-    )
+        if (successful) {
+            console.log("Sign in successful")
+            callback(true)
+
+        } else console.log("Sign in failed")
+    })
 }
 
 export default AuthDialog;

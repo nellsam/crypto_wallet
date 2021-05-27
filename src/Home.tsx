@@ -9,15 +9,7 @@ function Home() {
     return (
         <div>
 
-            <div id={'navigation'}>
-                <a id={'nav_title'} href={"/"}>Crypto wallet</a>
-
-                <div id={'nav_items'}>
-
-                    <AuthDialog/>
-
-                </div>
-            </div>
+            <Navigation/>
 
             <div id={'year_select'}>
                 <YearSelect/>
@@ -80,6 +72,20 @@ function Home() {
 
         </div>
     );
+}
+
+function Navigation() {
+    return (
+        <div id={'navigation'}>
+            <a id={'nav_title'} href={"/"}>Crypto wallet</a>
+
+            <div id={'nav_items'}>
+
+                <AuthDialog/>
+
+            </div>
+        </div>
+    )
 }
 
 const btcState = getState(2021, [29388, 36790, 33535, 47936, 49635, 55665, 58730, 63233])

@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import YearSelect from "./YearSelect";
-import {CryptoGraph} from "./graphs/CryptoGraph";
 import TestJs from "./TestJs";
-import AuthDialog from "./authentication/ui/AuthDialog";
 import {BrowserRouter} from "react-router-dom";
 import Wallet from "./Wallet";
 import {Route, Switch} from "react-router";
