@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import TestJs from "./TestJs";
 import {BrowserRouter} from "react-router-dom";
-import Wallet from "./Wallet";
+import Wallet from "./wallet/Wallet";
 import {Route, Switch} from "react-router";
-import Home from "./Home";
+import Home from "./home/Home";
 
 function App() {
 

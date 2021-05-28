@@ -1,14 +1,14 @@
 import * as jQuery from "jquery";
-import {backendPath} from "./BackendPath";
+import {backendPath} from "./utils/BackendPath";
 import axios, {AxiosRequestConfig} from "axios"
 // https://stackoverflow.com/questions/29918400/executing-a-php-file-using-ajax-request
 // https://medium.com/@davisonpro/an-advanced-guide-on-setting-up-a-react-and-php-web-app-acaedb21ab3a
 
 // Data
 // https://coinmarketcap.com/currencies/bitcoin/
+// https://finance.yahoo.com/cryptocurrencies/
+
 // https://www.pluralsight.com/guides/how-to-handle-ajax-with-react
-
-
 // https://www.youtube.com/watch?v=96DuZ33NX_Y&ab_channel=AVDojo
 
 

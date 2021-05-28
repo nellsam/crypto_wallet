@@ -14,7 +14,7 @@ import {SignUpState, getChangedAuthField, getInitialSignUpState} from "../state/
 import {getInitialSignInState, SignInState} from "../state/SignInState";
 import {signUp} from "../utils/SignUp";
 import {Redirect, Route} from "react-router";
-import Wallet from "../../Wallet";
+import Wallet from "../../wallet/Wallet";
 import {signIn} from "../utils/SignIn";
 
 // https://material-ui.com/components/text-fields/

@@ -1,5 +1,5 @@
 import * as jQuery from "jquery";
-import {backendPath} from "../../BackendPath";
+import {backendPath} from "../../utils/BackendPath";
 
 
 export function signIn(singInState, callback) {

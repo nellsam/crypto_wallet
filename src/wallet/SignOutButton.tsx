@@ -1,38 +1,13 @@
 import React, {useState} from "react";
+import {Redirect} from "react-router";
 import Button from "@material-ui/core/Button";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Redirect} from "react-router";
 
-
-function Wallet() {
-
-    return (
-        <div className="Wallet">
-
-            <Navigation/>
-
-            <p>Welcome to wallet</p>
-        </div>
-
-    )
+interface SignOutButtonProps {
+    onClick : () => any
 }
 
-
-function Navigation() {
-    return (
-        <div id={'navigation'}>
-            <a id={'nav_title'} href={"/"}>Crypto wallet</a>
-
-            <div id={'nav_items'}>
-
-                <SignOutButton/>
-
-            </div>
-        </div>
-    )
-}
-
-function SignOutButton() {
+export default function SignOutButton() {
 
     const classes = useSignOutButtonStyles();
 
@@ -70,5 +45,3 @@ function signOut() {
 
     console.log("Sign out called")
 }
-
-export default Wallet;
