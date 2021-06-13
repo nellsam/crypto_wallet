@@ -1,8 +1,8 @@
 import WalletOptions from "./WalletOptions";
 import {btcState} from "../crypto/CryptoData";
-import React from "react";
+import React, {useState} from "react";
 import {WalletCryptoGraph} from "./WalletCryptoGraph";
-import {CryptoConstants} from "../crypto/CryptoConstants";
+import {CryptoConstants, getCryptoName} from "../crypto/CryptoConstants";
 import CryptoPrice from "./CryptoPrice";
 import CryptoBalance from "./CryptoBalance";
 import {CryptoTypes} from "../crypto/CryptoTypes";
@@ -12,17 +12,18 @@ export default function CryptoTabContent(props : CryptoTypeContentProps) {
 
     const classes = useStyles()
 
+    const cryptoCurrencyName = getCryptoName(props.type)
+
     return (
 
         <div className={classes.root}>
-
             <div className={classes.block}>
 
                 <CryptoPrice type={props.type}/>
                 <CryptoBalance type={props.type}/>
 
                 <div className={'graph_wallet'}>
-                    <WalletCryptoGraph name={CryptoConstants.BITCOIN} price={29288} data={btcState}/>
+                    <WalletCryptoGraph name={cryptoCurrencyName} price={0} data={btcState}/>
                 </div>
             </div>
 

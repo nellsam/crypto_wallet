@@ -3,13 +3,24 @@ import {getCryptoSymbol} from "../crypto/CryptoConstants";
 import {getFormattedPrice} from "../utils/FormattedPrice";
 import {Card} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import getCryptoPrice from "../crypto/price/CurrentCryptoPrice";
+import {useState} from "react";
 
 
 export default function CryptoPrice(props : CryptoPriceProps) {
 
+    const[price, setPrice] = useState(0)
+
+    getCryptoPrice(props.type, (price : number) => {
+        console.log('Retrieved btc price' + price)
+
+        // Update state
+        setPrice(price)
+    })
+
     const symbol = getCryptoSymbol(props.type)
-    const price = getFormattedPrice(29234)
-    const title = "1 " + symbol + " = " + price
+    const formattedPrice = getFormattedPrice(price)
+    const title = "1 " + symbol + " = " + formattedPrice
 
     const classes = useStyles()
 
